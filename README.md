@@ -1,4 +1,4 @@
-# hummingbird
+# Colibri 
 Implementation of proposed RFC 7815 Minimal IKE from scratch.
 This is an academic project.
 
