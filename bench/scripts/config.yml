@@ -1,0 +1,19 @@
+# ==========================
+# Configurazione generale
+# ==========================
+compose_file: "../env/docker-compose.yml"    # Percorso del file docker-compose
+results_dir: "../results"                 
+log_initiator: "../env/initiator_classic/charon.log"
+
+# ==========================
+# Container e connessioni
+# ==========================
+container_initiator: "initiator_minimal"    # initiator_minimal | initiator_classic
+container_responder: "responder"          # Nome del container responder
+connection_name: "colibri"                 # rinominare in classical e post-quantum
+security_level: "L1"                    # specifica il security level della suite che si vuole utilizzare
+
+# ==========================
+# Simulazione e iterazioni
+# ==========================
+iterations: 100           # Numero di iterazioni della negoziazione IKE

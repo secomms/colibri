@@ -1,0 +1,159 @@
+07.941179 04[IKE] retransmit 2 of request with message ID 0
+07.941327 04[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175] (76 bytes)
+07.941427 01[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175]
+18.094458 16[NET] received packet => 152 bytes @ 0x7f45bdabc3d0
+18.094458 16[NET]    0: 99 3A B6 52 EB 42 22 4D 00 00 00 00 00 00 00 00  .:.R.B"M........
+18.094458 16[NET]   16: 21 20 22 08 00 00 00 00 00 00 00 1C 22 00 00 30  ! "........."..0
+18.094458 16[NET]   32: 00 00 00 2C 01 01 00 04 00 00 00 0C 01 00 00 0C  ...,............
+18.094458 16[NET]   48: 80 0E 00 80 00 00 00 08 04 00 00 1F 00 00 00 08  ................
+18.094458 16[NET]   64: 03 00 00 02 00 00 00 08 02 00 00 02 28 00 00 28  ............(..(
+18.094458 16[NET]   80: 00 1F 00 00 C5 12 45 01 64 48 E2 36 C8 57 96 B6  ......E.dH.6.W..
+18.094458 16[NET]   96: 49 E4 69 EE 67 B8 DB DA F4 71 4F 1D 4C F5 70 C5  I.i.g....qO.L.p.
+18.094458 16[NET]  112: 17 22 19 7F 00 00 00 24 9E 2C C4 E7 59 DA 3F 6A  .".....$.,..Y.?j
+18.094458 16[NET]  128: 66 18 62 6F E9 72 57 C2 60 EB 01 31 1B 6D B7 88  f.bo.rW.`..1.m..
+18.094458 16[NET]  144: CB 63 13 1B EA 68 51 C6                          .c...hQ.
+18.094586 16[NET] received packet: from 127.0.0.1[60718] to 127.0.0.1[500]
+18.094622 16[NET] waiting for data on sockets
+18.094735 09[NET] received packet: from 127.0.0.1[60718] to 127.0.0.1[500] (152 bytes)
+18.094784 09[IKE] local endpoint changed from 0.0.0.0[500] to 127.0.0.1[500]
+18.094792 09[IKE] remote endpoint changed from 0.0.0.0 to 127.0.0.1[60718]
+18.094816 09[IKE] 127.0.0.1 is initiating an IKE_SA
+18.094822 09[IKE] IKE_SA (unnamed)[5] state change: CREATED => CONNECTING
+18.094953 09[IKE] natd_chunk => 22 bytes @ 0x7f459c003c10
+18.094953 09[IKE]    0: 99 3A B6 52 EB 42 22 4D 00 00 00 00 00 00 00 00  .:.R.B"M........
+18.094953 09[IKE]   16: 7F 00 00 01 01 F4                                ......
+18.094968 09[IKE] natd_hash => 20 bytes @ 0x7f459c002d90
+18.094968 09[IKE]    0: 02 09 42 16 85 05 7D B5 13 5A 84 B9 F8 CE 77 00  ..B...}..Z....w.
+18.094968 09[IKE]   16: 8C 9D F3 EE                                      ....
+18.094980 09[IKE] natd_chunk => 22 bytes @ 0x7f459c003c10
+18.094980 09[IKE]    0: 99 3A B6 52 EB 42 22 4D 00 00 00 00 00 00 00 00  .:.R.B"M........
+18.094980 09[IKE]   16: 7F 00 00 01 ED 2E                                ......
+18.094990 09[IKE] natd_hash => 20 bytes @ 0x7f459c003bf0
+18.094990 09[IKE]    0: 63 C5 F7 81 21 FD 0A E0 FA 3C AB B9 EE 94 22 E6  c...!....<....".
+18.094990 09[IKE]   16: CE 50 EB 46                                      .P.F
+18.095000 09[IKE] precalculated src_hash => 20 bytes @ 0x7f459c003bf0
+18.095000 09[IKE]    0: 63 C5 F7 81 21 FD 0A E0 FA 3C AB B9 EE 94 22 E6  c...!....<....".
+18.095000 09[IKE]   16: CE 50 EB 46                                      .P.F
+18.095012 09[IKE] precalculated dst_hash => 20 bytes @ 0x7f459c002d90
+18.095012 09[IKE]    0: 02 09 42 16 85 05 7D B5 13 5A 84 B9 F8 CE 77 00  ..B...}..Z....w.
+18.095012 09[IKE]   16: 8C 9D F3 EE                                      ....
+18.095053 09[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[60718] (160 bytes)
+18.095080 01[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[60718]
+18.095574 16[NET] received packet => 108 bytes @ 0x7f45bdabc3d0
+18.095574 16[NET]    0: 99 3A B6 52 EB 42 22 4D CB F1 D8 31 DE 7E 44 98  .:.R.B"M...1.~D.
+18.095574 16[NET]   16: 2E 20 23 08 00 00 00 01 00 00 00 6C 23 00 00 50  . #........l#..P
+18.095574 16[NET]   32: CB CE 6D 0A 18 BD 08 D1 74 D2 C5 CB CE DE 5A 34  ..m.....t.....Z4
+18.095574 16[NET]   48: E8 91 D8 59 63 CC 91 CD 8E FD 5F 97 04 1D 67 E3  ...Yc....._...g.
+18.095574 16[NET]   64: F6 E1 29 00 73 5F 02 D3 E7 78 AB 28 80 C3 9A 9F  ..).s_...x.(....
+18.095574 16[NET]   80: 98 72 83 45 55 6A ED 4B 8E CD CC 55 EA DA 51 F1  .r.EUj.K...U..Q.
+18.095574 16[NET]   96: A8 B8 6A 03 43 84 DC E5 DE 86 6B E2              ..j.C.....k.
+18.095629 16[NET] received packet: from 127.0.0.1[60718] to 127.0.0.1[500]
+18.095640 16[NET] waiting for data on sockets
+18.095674 10[NET] received packet: from 127.0.0.1[60718] to 127.0.0.1[500] (108 bytes)
+18.095855 10[IKE] key exchange secret => 32 bytes @ 0x7f4578002320
+18.095855 10[IKE]    0: 80 74 AF 0D A8 19 8F FF 59 6E 3C BC 60 6F 31 36  .t......Yn<.`o16
+18.095855 10[IKE]   16: DA 98 71 7B 41 4F 3A 2D FF C5 38 A0 38 05 F7 7F  ..q{AO:-..8.8...
+18.095878 10[IKE] additional key exchange secret => 0 bytes @ (nil)
+18.095887 10[IKE] nonces => 64 bytes @ 0x7f4578008050
+18.095887 10[IKE]    0: 9E 2C C4 E7 59 DA 3F 6A 66 18 62 6F E9 72 57 C2  .,..Y.?jf.bo.rW.
+18.095887 10[IKE]   16: 60 EB 01 31 1B 6D B7 88 CB 63 13 1B EA 68 51 C6  `..1.m...c...hQ.
+18.095887 10[IKE]   32: 8D 6E 85 5C 7C 99 01 B1 63 4F E2 86 4E 02 18 12  .n.\|...cO..N...
+18.095887 10[IKE]   48: 2C 79 F7 DE 70 62 A8 76 F4 5A A3 2E AF E2 E0 4D  ,y..pb.v.Z.....M
+18.095968 10[IKE] SKEYSEED => 20 bytes @ 0x7f4578002c40
+18.095968 10[IKE]    0: 92 2C 8B 78 E8 CD C2 94 AC 0A 08 24 3C 80 DE 28  .,.x.......$<..(
+18.095968 10[IKE]   16: BA 16 8D C8                                      ....
+18.096002 10[IKE] Sk_d secret => 20 bytes @ 0x7f4578001470
+18.096002 10[IKE]    0: 48 EE 58 EE 48 6A CE A7 95 A4 B7 0C 0E ED 11 98  H.X.Hj..........
+18.096002 10[IKE]   16: 9C 3E 14 3E                                      .>.>
+18.096020 10[IKE] Sk_ai secret => 20 bytes @ 0x7f4578002364
+18.096020 10[IKE]    0: 2C 7F 73 1F F6 F2 32 06 23 D3 6B 6A 45 0E 34 DC  ,.s...2.#.kjE.4.
+18.096020 10[IKE]   16: 18 CA 95 11                                      ....
+18.096037 10[IKE] Sk_ar secret => 20 bytes @ 0x7f4578002378
+18.096037 10[IKE]    0: 69 C0 08 3F A7 EB 36 BE AD 01 A6 7B C4 5C 93 02  i..?..6....{.\..
+18.096037 10[IKE]   16: D4 6C DD C7                                      .l..
+18.096055 10[IKE] Sk_ei secret => 16 bytes @ 0x7f457800238c
+18.096055 10[IKE]    0: 03 CB EB 94 92 D2 59 43 C5 80 3A 40 75 AB C9 0A  ......YC..:@u...
+18.096066 10[IKE] Sk_er secret => 16 bytes @ 0x7f457800239c
+18.096066 10[IKE]    0: 64 FC F5 A6 EC 24 E6 CD EF 1F 7E 83 10 41 42 50  d....$....~..ABP
+18.096083 10[IKE] Sk_pi secret => 20 bytes @ 0x7f4578002c40
+18.096083 10[IKE]    0: 88 58 D4 48 B4 E7 A3 DB B6 07 B0 A4 11 68 0E 94  .X.H.........h..
+18.096083 10[IKE]   16: DD 4B 1B D0                                      .K..
+18.096100 10[IKE] Sk_pr secret => 20 bytes @ 0x7f4578001180
+18.096100 10[IKE]    0: 66 48 18 21 6B 73 2C 62 F8 71 9E 0A 5D 1A 97 49  fH.!ks,b.q..]..I
+18.096100 10[IKE]   16: A9 16 A0 4F                                      ...O
+18.096183 10[IKE] IDx' => 8 bytes @ 0x7f45c0ac4870
+18.096183 10[IKE]    0: 01 00 00 00 7F 00 00 01                          ........
+18.096199 10[IKE] SK_p => 20 bytes @ 0x7f4578002c40
+18.096199 10[IKE]    0: 88 58 D4 48 B4 E7 A3 DB B6 07 B0 A4 11 68 0E 94  .X.H.........h..
+18.096199 10[IKE]   16: DD 4B 1B D0                                      .K..
+18.096221 10[IKE] octets = message + nonce + prf(Sk_px, IDx') + IntAuth => 204 bytes @ 0x7f4578008a20
+18.096221 10[IKE]    0: 99 3A B6 52 EB 42 22 4D 00 00 00 00 00 00 00 00  .:.R.B"M........
+18.096221 10[IKE]   16: 21 20 22 08 00 00 00 00 00 00 00 1C 22 00 00 30  ! "........."..0
+18.096221 10[IKE]   32: 00 00 00 2C 01 01 00 04 00 00 00 0C 01 00 00 0C  ...,............
+18.096221 10[IKE]   48: 80 0E 00 80 00 00 00 08 04 00 00 1F 00 00 00 08  ................
+18.096221 10[IKE]   64: 03 00 00 02 00 00 00 08 02 00 00 02 28 00 00 28  ............(..(
+18.096221 10[IKE]   80: 00 1F 00 00 C5 12 45 01 64 48 E2 36 C8 57 96 B6  ......E.dH.6.W..
+18.096221 10[IKE]   96: 49 E4 69 EE 67 B8 DB DA F4 71 4F 1D 4C F5 70 C5  I.i.g....qO.L.p.
+18.096221 10[IKE]  112: 17 22 19 7F 00 00 00 24 9E 2C C4 E7 59 DA 3F 6A  .".....$.,..Y.?j
+18.096221 10[IKE]  128: 66 18 62 6F E9 72 57 C2 60 EB 01 31 1B 6D B7 88  f.bo.rW.`..1.m..
+18.096221 10[IKE]  144: CB 63 13 1B EA 68 51 C6 8D 6E 85 5C 7C 99 01 B1  .c...hQ..n.\|...
+18.096221 10[IKE]  160: 63 4F E2 86 4E 02 18 12 2C 79 F7 DE 70 62 A8 76  cO..N...,y..pb.v
+18.096221 10[IKE]  176: F4 5A A3 2E AF E2 E0 4D 61 5D 04 6D C3 71 BF 42  .Z.....Ma].m.q.B
+18.096221 10[IKE]  192: 05 D0 45 CD 60 2A E9 C4 F6 B3 8F 41              ..E.`*.....A
+18.096306 10[IKE] secret => 8 bytes @ 0x7f4578000c50
+18.096306 10[IKE]    0: 70 61 64 72 65 70 69 6F                          padrepio
+18.096325 10[IKE] prf(secret, keypad) => 20 bytes @ 0x7f45780088c0
+18.096325 10[IKE]    0: 66 4D C9 9F 6D 5A CE 06 84 8E 08 06 51 97 38 B7  fM..mZ......Q.8.
+18.096325 10[IKE]   16: F2 F6 2C 60                                      ..,`
+18.096352 10[IKE] AUTH = prf(prf(secret, keypad), octets) => 20 bytes @ 0x7f4578008a00
+18.096352 10[IKE]    0: A8 14 6D FB 2B DE CE D7 DF C1 7F B9 3D 72 94 7A  ..m.+.......=r.z
+18.096352 10[IKE]   16: 47 7B C0 C6                                      G{..
+18.096382 10[IKE] authentication of '127.0.0.1' with pre-shared key successful
+18.096415 10[IKE] authentication of 'moon' (myself) with pre-shared key
+18.096432 10[IKE] IDx' => 8 bytes @ 0x7f45c0ac48a0
+18.096432 10[IKE]    0: 02 00 00 00 6D 6F 6F 6E                          ....moon
+18.096447 10[IKE] SK_p => 20 bytes @ 0x7f4578001180
+18.096447 10[IKE]    0: 66 48 18 21 6B 73 2C 62 F8 71 9E 0A 5D 1A 97 49  fH.!ks,b.q..]..I
+18.096447 10[IKE]   16: A9 16 A0 4F                                      ...O
+18.096478 10[IKE] octets = message + nonce + prf(Sk_px, IDx') + IntAuth => 212 bytes @ 0x7f4578008a20
+18.096478 10[IKE]    0: 99 3A B6 52 EB 42 22 4D CB F1 D8 31 DE 7E 44 98  .:.R.B"M...1.~D.
+18.096478 10[IKE]   16: 21 20 22 20 00 00 00 00 00 00 00 A0 22 00 00 30  ! " ........"..0
+18.096478 10[IKE]   32: 00 00 00 2C 01 01 00 04 03 00 00 0C 01 00 00 0C  ...,............
+18.096478 10[IKE]   48: 80 0E 00 80 03 00 00 08 03 00 00 02 03 00 00 08  ................
+18.096478 10[IKE]   64: 02 00 00 02 00 00 00 08 04 00 00 1F 28 00 00 28  ............(..(
+18.096478 10[IKE]   80: 00 1F 00 00 37 26 E0 B5 94 65 8C 17 6C 2E 55 67  ....7&...e..l.Ug
+18.096478 10[IKE]   96: 08 29 95 1B 0A D5 C3 EE A7 EA 5F BC BD 58 06 56  .)........_..X.V
+18.096478 10[IKE]  112: 03 71 ED 4A 29 00 00 24 8D 6E 85 5C 7C 99 01 B1  .q.J)..$.n.\|...
+18.096478 10[IKE]  128: 63 4F E2 86 4E 02 18 12 2C 79 F7 DE 70 62 A8 76  cO..N...,y..pb.v
+18.096478 10[IKE]  144: F4 5A A3 2E AF E2 E0 4D 00 00 00 08 00 00 40 22  .Z.....M......@"
+18.096478 10[IKE]  160: 9E 2C C4 E7 59 DA 3F 6A 66 18 62 6F E9 72 57 C2  .,..Y.?jf.bo.rW.
+18.096478 10[IKE]  176: 60 EB 01 31 1B 6D B7 88 CB 63 13 1B EA 68 51 C6  `..1.m...c...hQ.
+18.096478 10[IKE]  192: 5E 05 EF 1F F6 3D 7E B4 2F 54 1F 10 BF D7 9E D3  ^....=~./T......
+18.096478 10[IKE]  208: 49 80 9A 9F                                      I...
+18.096546 10[IKE] secret => 8 bytes @ 0x7f4578000c50
+18.096546 10[IKE]    0: 70 61 64 72 65 70 69 6F                          padrepio
+18.096554 10[IKE] prf(secret, keypad) => 20 bytes @ 0x7f4578008b00
+18.096554 10[IKE]    0: 66 4D C9 9F 6D 5A CE 06 84 8E 08 06 51 97 38 B7  fM..mZ......Q.8.
+18.096554 10[IKE]   16: F2 F6 2C 60                                      ..,`
+18.096564 10[IKE] AUTH = prf(prf(secret, keypad), octets) => 20 bytes @ 0x7f45780071e0
+18.096564 10[IKE]    0: AF 17 87 47 B7 D7 C7 95 E5 FD 6F ED CC 17 AF 9B  ...G......o.....
+18.096564 10[IKE]   16: 09 7C 35 04                                      .|5.
+18.096580 10[IKE] successfully created shared key MAC
+18.096594 10[IKE] IKE_SA minimal[5] established between 127.0.0.1[moon]...127.0.0.1[127.0.0.1]
+18.096599 10[IKE] IKE_SA minimal[5] state change: CONNECTING => ESTABLISHED
+18.096605 10[IKE] scheduling rekeying in 13352s
+18.096612 10[IKE] maximum IKE_SA lifetime 14792s
+18.096649 10[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[60718] (108 bytes)
+18.096666 01[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[60718]
+20.901651 06[IKE] retransmit 3 of request with message ID 0
+20.901763 06[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175] (76 bytes)
+20.901875 01[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175]
+34.916437 11[IKE] giving up after 5 retransmits
+34.916536 11[IKE] proper IKE_SA delete failed, peer not responding
+34.916603 11[IKE] IKE_SA minimal[3] state change: DELETING => DESTROYING
+44.230043 12[IKE] retransmit 4 of request with message ID 0
+44.230179 12[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175] (76 bytes)
+44.230268 01[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175]
+26.220379 08[IKE] retransmit 5 of request with message ID 0
+26.220463 08[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175] (76 bytes)
+26.220560 01[NET] sending packet: from 127.0.0.1[500] to 127.0.0.1[50175]
