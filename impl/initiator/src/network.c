@@ -10,7 +10,6 @@
 #include <sys/socket.h>
 #include <unistd.h>
 #include <ifaddrs.h>
-#include <ifaddrs.h>
 #include <endian.h>
 #include "../include/utils.h"
 #include "../include/config.h"

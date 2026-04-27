@@ -130,17 +130,9 @@ int main(int argc, char* argv[]){
     ike_payload_t* header_p = malloc(sizeof(ike_payload_t));
 
 
-    LOAD_MODULE("NET", initiate_network, &left.node, &right.node, &cfg->peer);
-    LOAD_MODULE("AUT", initiate_auth, &left.aut, &cfg->auth);
-    
-    
+    initiate_ike(&left, &right, &sa, cfg);
     clock_gettime(CLOCK_MONOTONIC, &start_init);
-    LOAD_MODULE("CRY", initiate_crypto, &sa.suite, &left.ctx, &cfg->suite);
 
-    free(cfg);
-
-    //initiate_ike(&left, &right, &sa, cfg);
-    
 
     /*
     EVP_PKEY* pri = NULL;
