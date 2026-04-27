@@ -16,6 +16,10 @@
 #include "../include/utils.h"
 #include "../include/crypto.h" // IWYU pragma: keep
 
+#include "../include/crypto/registry.h" // IWYU pragma: keep
+
+
+
 static const algo_t algo_table[] = {
     // ENCRYPTION
     { "aes128", 12, 128, ALGO_TYPE_ENCRYPTION },
@@ -41,6 +45,21 @@ const algo_t* find_algo_by_name(const char *name, algo_type_t type) {
     }
     return NULL;
 }
+
+int validate_suite_2(const cipher_options *opts, cipher_suite_t_2*suite) {
+    suite->enc  = enc_by_name(opts->enc);
+    suite->prf  = hash_by_name(opts->prf);
+    suite->kex  = kem_by_name(opts->kex);
+    //suite->sig  = opts->sig ? sig_by_name(opts->sig) : NULL;
+
+    if (!suite->enc)  { log_error("[CFG] unknown enc: %s",  opts->enc);  return EXIT_FAILURE; }
+    if (!suite->prf)  { log_error("[CFG] unknown prf: %s",  opts->prf);  return EXIT_FAILURE; }
+    //if (!suite->auth) { log_error("[CFG] unknown auth: %s", opts->auth); return EXIT_FAILURE; }
+    if (!suite->kex)  { log_error("[CFG] unknown kex: %s",  opts->kex);  return EXIT_FAILURE; }
+
+    return EXIT_SUCCESS;
+}
+
 
 int validate_algo(const char* keyword, algo_type_t type, algo_t* alg){
     const algo_t *tmp = find_algo_by_name(keyword, type);
@@ -75,17 +94,16 @@ int random_bytes(uint8_t** buff, size_t size){
     return EXIT_SUCCESS;
 }
 
+
 /**
 * @brief This function return a secure random string to use as security parameter index for the initiator using random material generated from /dev/urandom
 * @param[in] spi Is the pointer to the buffer that will contain the spi
 * @param[in] len This is the len of the spi is, there is a default value
 */
 void generate_raw_spi(uint8_t spi[], size_t len) {
-    
-    uint8_t* tmp = NULL; 
-    alloc_buffer(&tmp, len);
-    random_bytes(&tmp, len);
-    memcpy(spi, tmp, SPI_LENGTH_BYTE);
+    if (getrandom(spi, len, 0) == -1) {
+        log_error("[SPI] getrandom failed");
+    }
 }
 
 /**
@@ -104,6 +122,7 @@ void generate_nonce(uint8_t** nonce, size_t len) {
 * @param[in] pri The private key, is of the type EVP_PKEY because the context inside this struct are necessary to derive correctly the secret
 * @param[in] pub The public key, this is a buffer becuase we have to send this content in the init exchange
 */
+// RINOMINARE IN KEM_KEYGEN E RENDERE PAREMTETICA
 void generate_key(EVP_PKEY** pri, uint8_t** pub, const char* name, size_t* len){
     
     *pri = NULL;
@@ -142,6 +161,7 @@ int initiate_crypto(cipher_suite_t* suite, crypto_context_t* ctx, const cipher_o
     // invece che prendere solo il contesto deve prendere in input anche la parte della suite dato che il valore delle chiavi presenti nel crypto context dipende dagli algortimi
     log_debug("[CRY] Validating configurations options");
 
+
     //prima di fare la configurazione per la chiave farlo per la suite
     // dato che l'algoritmo da utilizzare per generare la chiave dipende dalla suite (anche se per il momento la mettiamo hardcoded)
     // dunque la parte di generazione della chiave dipende pubblica e privata dipende dalla proposal
@@ -150,6 +170,8 @@ int initiate_crypto(cipher_suite_t* suite, crypto_context_t* ctx, const cipher_o
     log_trace("%-4s: %s-%s-%s-%s", "SAi", opts->enc, opts->aut, opts->kex, opts->prf);
     if(ret == EXIT_FAILURE) return EXIT_FAILURE;
 
+    cipher_suite_t_2 tmp = {0};
+    validate_suite_2(opts, &tmp);
     /* SPI configuration */
     generate_raw_spi(ctx->spi, SPI_LENGTH_BYTE);
     size_t str_len = 2* SPI_LENGTH_BYTE +1;

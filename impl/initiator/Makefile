@@ -1,44 +1,47 @@
 ######################################################################
 # Makefile
 ######################################################################
+CC      := gcc
+TARGET  := build/colibri
+OBJDIR  := build/obj
 
-TARGET = ./build/hummingbird
+SRCS := $(shell find src/ -name '*.c' | sort)
+OBJS := $(patsubst src/%.c, $(OBJDIR)/%.o, $(SRCS))
 
-SRCS = src/main.c 				\
-       src/config.c 		\
-	   src/log.c 			\
-	   src/network.c	\
-	   src/utils.c 		\
-	   src/crypto.c 		\
-	   src/ike/header.c 		\
-	   src/ike/payload.c 		\
-	   src/ike/packet.c			\
-	   src/auth.c			\
-	   src/ike/ike.c
+CFLAGS  := -Wall -Wextra -DLOG_USE_COLOR -I include/
+DBGFLAGS:= -g3 -DDEBUG
+LIBS    := -linih -lssl -lcrypto
+LDFLAGS := $(LIBS)
 
-LIBS =  -linih					\
-		-lssl 					\
-		-lcrypto 				\
-		-g			 
+.PHONY: all clean debug noconfig
 
-CFLAGS = -DLOG_USE_COLOR -Wall 	\
-		 -I include/ 			\
+######################################################################
+# Target
+######################################################################
 
-LDFLAGS = $(LIBS)
-
-# Regola principale per costruire il target, diciamo quali sono tutti i file sorgenti di cui ha bisogno
-# CC è il comando del compilatore
-# o indica il nome dell'output $@ è una variabile automatica in Makefile che rappresenta il target della regola corrente, in questo caso, $(TARGET), quindi il nome dell'eseguibile.
-# $^ Rappresenta tutti i prerequisiti della regola. In questo caso, tutti i file sorgenti $(SRCS) 
-$(TARGET): $(SRCS)
-	$(CC) $(CFLAGS) -o $@ $^ $(LDFLAGS)
-
-# Regola per pulire i file generati
-clean:
-	rm -f $(TARGET)
-
-# Regola predefinita
 all: $(TARGET)
 
-noconfig: clean
-	$(MAKE) CFLAGS="$(CFLAGS) -DNO_INI_PARSING" $(TARGET)
+# Link finale
+$(TARGET): $(OBJS)
+	@mkdir -p $(dir $@)
+	$(CC) $(OBJS) $(LDFLAGS) -o $@
+	@echo "[LD]  $@"
+
+# Compilazione incrementale — ogni .c → il suo .o
+$(OBJDIR)/%.o: src/%.c
+	@mkdir -p $(dir $@)
+	$(CC) $(CFLAGS) -c $< -o $@
+	@echo "[CC]  $<"
+
+######################################################################
+# Varianti
+######################################################################
+
+debug: CFLAGS += $(DBGFLAGS)
+debug: $(TARGET)
+
+noconfig: CFLAGS += -DNO_INI_PARSING
+noconfig: clean $(TARGET)
+
+clean:
+	rm -rf $(OBJDIR) $(TARGET)

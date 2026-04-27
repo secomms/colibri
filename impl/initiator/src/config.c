@@ -11,6 +11,11 @@ MACRO SECTION to make the code more readable
 #define SET_DEFAUTL_FIELD(cfg, sub, field, val) strncpy((cfg)->sub.field, (val), sizeof((cfg)->sub.field))
 #define HANDLE_FIELD(sec, field, src, dst, max_len)  if (MATCH(sec, field)) { secure_strncpy(dst, src, max_len); return 1; }
 
+#define SEC_NETWORK        "Network"
+#define SEC_AUTHENTICATION "Authentication"
+#define SEC_CRYPTO         "Crypto"
+#define SEC_LOGGING        "Logging"
+
 /**
 * @brief This function is used to make a secure copy, it limits the maximum number of characters to be copied to avoid overflow
 * @param[out] dest Pointer to the destination
@@ -59,9 +64,9 @@ void default_config(config* cfg){
 */
 int auth_handler(auth_options_t* opts, const char* section, const char* name, const char* value){
 
-    HANDLE_FIELD(section, "id",        value,  opts->id,       MAX_ID_LENGTH);
-    HANDLE_FIELD(section, "method",    value,  opts->method,   MAX_AUTH_METHOD_LEN);
-    HANDLE_FIELD(section, "data",      value,  opts->data,     MAX_AUTH_DATA_LEN);
+    HANDLE_FIELD(SEC_AUTHENTICATION, "id",        value,  opts->id,       MAX_ID_LENGTH);
+    HANDLE_FIELD(SEC_AUTHENTICATION, "method",    value,  opts->method,   MAX_AUTH_METHOD_LEN);
+    HANDLE_FIELD(SEC_AUTHENTICATION, "data",      value,  opts->data,     MAX_AUTH_DATA_LEN);
     return 0;
 
 }
@@ -76,10 +81,9 @@ int auth_handler(auth_options_t* opts, const char* section, const char* name, co
 */
 int net_handler(net_options_t* opts, const char* section, const char* name, const char* value){
 
-    HANDLE_FIELD(section, "initiator",  value,  opts->initiator,  INET_ADDRSTRLEN);
-    HANDLE_FIELD(section, "responder",   value,  opts->responder,   INET_ADDRSTRLEN);
-    HANDLE_FIELD(section, "port",      value,  opts->port,      MAX_PORT_LENGTH);
-
+    HANDLE_FIELD(SEC_NETWORK, "initiator",  value,  opts->initiator,  INET_ADDRSTRLEN);
+    HANDLE_FIELD(SEC_NETWORK, "responder",   value,  opts->responder,   INET_ADDRSTRLEN);
+    HANDLE_FIELD(SEC_NETWORK, "port",      value,  opts->port,      MAX_PORT_LENGTH);
     return 0;
 
 }
@@ -93,11 +97,10 @@ int net_handler(net_options_t* opts, const char* section, const char* name, cons
 */
 int crypto_handler(cipher_options* opts, const char* section, const char* name, const char* value){
     
-    HANDLE_FIELD(section, "encryption",        value,  opts->enc,  MAX_ID_LENGTH);
-    HANDLE_FIELD(section, "authentication",    value,  opts->aut,  MAX_ID_LENGTH);
-    HANDLE_FIELD(section, "pseudorandom",      value,  opts->prf,  MAX_ID_LENGTH);
-    HANDLE_FIELD(section, "key-exchange",      value,  opts->kex,  MAX_ID_LENGTH);
-
+    HANDLE_FIELD(SEC_CRYPTO, "encryption",        value,  opts->enc,  MAX_ID_LENGTH);
+    HANDLE_FIELD(SEC_CRYPTO, "authentication",    value,  opts->aut,  MAX_ID_LENGTH);
+    HANDLE_FIELD(SEC_CRYPTO, "pseudorandom",      value,  opts->prf,  MAX_ID_LENGTH);
+    HANDLE_FIELD(SEC_CRYPTO, "key-exchange",      value,  opts->kex,  MAX_ID_LENGTH);
     return 0;
 }
 
@@ -129,20 +132,13 @@ int handler(void* cfg, const char* section, const char* name, const char* value)
 
     config* conf = (config *) cfg;
 
-    if (strcmp(section, "Network") == 0){
-        net_handler(&conf->peer, section, name, value);
+    if      (strcmp(section, SEC_NETWORK)        == 0) return net_handler   (&conf->peer,  section, name, value);
+    else if (strcmp(section, SEC_AUTHENTICATION) == 0) return auth_handler  (&conf->auth,  section, name, value);
+    else if (strcmp(section, SEC_CRYPTO)         == 0) return crypto_handler(&conf->suite, section, name, value);
+    else if (strcmp(section, SEC_LOGGING)        == 0) return log_handler   (&conf->log,   section, name, value);
+    else {
+        printf("[CFG] unknown section: [%s]", section);
+        return 0;
     }
-    if (strcmp(section, "Authentication") == 0){
-        auth_handler(&conf->auth, section, name, value);
-    } 
-    if (strcmp(section, "Crypto") == 0){
-        crypto_handler(&conf->suite, section, name, value);
-    } 
-
-    if (strcmp(section, "Logging") == 0){
-        log_handler(&conf->log, section, name, value);
-    } 
-
-    return 1;
 
 }

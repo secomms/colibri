@@ -13,6 +13,7 @@
 #define SHA1_DIGEST_LENGTH 20
 #define NUM_KEYS 7
 
+
 typedef enum {
     ALGO_TYPE_ENCRYPTION    = 1,
     ALGO_TYPE_PRF           = 2,
