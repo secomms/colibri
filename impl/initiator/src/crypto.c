@@ -257,10 +257,7 @@ void derive_secret(EVP_PKEY* pri, uint8_t** pub, uint16_t dh_group, uint8_t** se
 }
 
 
-/**
-* @brief 
-*/
-int prf(uint8_t** key, size_t key_len, uint8_t** data, size_t data_len, uint8_t** digest, unsigned int* digest_len){
+int prf_old(uint8_t** key, size_t key_len, uint8_t** data, size_t data_len, uint8_t** digest, unsigned int* digest_len){
     
     if (!key || !data) {
         // se uno dei due non c'è non riesco ad ottenere l'output 
@@ -291,7 +288,7 @@ void derive_seed(crypto_context_t* left, crypto_context_t* right, uint8_t* seed)
     memcpy(key+left->nonce_len, right->nonce, right->nonce_len);
     //so at this point we can call prf funciton
     unsigned int seed_len = SHA1_DIGEST_LENGTH;
-    prf(&key, key_len, &ss, X25519_KEY_LENGTH, &seed, &seed_len);
+    prf_old(&key, key_len, &ss, X25519_KEY_LENGTH, &seed, &seed_len);
 
     char* str = calloc(SHA1_DIGEST_LENGTH, BYTE);
     format_hex_string(str, SHA1_DIGEST_LENGTH, seed, seed_len);
@@ -340,7 +337,7 @@ void prf_plus(crypto_context_t* left, crypto_context_t* right, uint8_t** T_buffe
     while(generated < NUM_KEYS * SHA1_DIGEST_LENGTH){
 
         if(generated == 0){
-            prf(&seed, SHA1_DIGEST_LENGTH, &msg, msg_len, &digest, &digest_len);
+            prf_old(&seed, SHA1_DIGEST_LENGTH, &msg, msg_len, &digest, &digest_len);
             //ho generato T1 quindi a questo punto
             // updating the message to sign
             msg_len += SHA1_DIGEST_LENGTH;
@@ -357,7 +354,7 @@ void prf_plus(crypto_context_t* left, crypto_context_t* right, uint8_t** T_buffe
         msg[msg_len-1]++;
 
         // aggiungere un controllo sul valore di ritorno della funzione
-        prf(&seed, SHA1_DIGEST_LENGTH, &msg, msg_len, &digest, &digest_len);
+        prf_old(&seed, SHA1_DIGEST_LENGTH, &msg, msg_len, &digest, &digest_len);
         memcpy(*T_buffer + generated, digest, digest_len);
         generated += SHA1_DIGEST_LENGTH;
     }

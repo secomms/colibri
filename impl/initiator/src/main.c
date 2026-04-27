@@ -34,6 +34,8 @@
 #include <unistd.h>
 
 
+#include "../include/crypto/crypto.h"
+
 typedef struct {
     ike_payload_t* items;
     size_t size;     
@@ -373,10 +375,16 @@ int main(int argc, char* argv[]){
     // si aggiunge l'hmac dell'id
 
     uint8_t* md = malloc(SHA1_DIGEST_LENGTH);
-    unsigned int md_len = 0;
+    size_t md_len = 0;
+
+    const hash_algo_t *sha1   = hash_by_name("hmac-sha1");
+    const hash_algo_t *sha256 = hash_by_name("hmac-sha256");
+
 
     // se si cambia l'identià devo cambiare anche questo
-    HMAC(EVP_sha1(), ike_sa.association.sk_pi, SHA1_DIGEST_LENGTH, (uint8_t*)id_in, 8, md, &md_len);
+
+    //HMAC(EVP_sha1(), ike_sa.association.sk_pi, SHA1_DIGEST_LENGTH, (uint8_t*)id_in, 8, md, &md_len);
+    prf(ike_sa.association.sk_pi, SHA1_DIGEST_LENGTH, (uint8_t*) id_in, 8, md, &md_len, sha1);
 
     memcpy(auth_payload + len + right.ctx.nonce_len, md, md_len);
 
@@ -389,15 +397,21 @@ int main(int argc, char* argv[]){
 
     const char *key_pad_str = "Key Pad for IKEv2";
     size_t key_pad_len = 17; // Senza \0
+    
+    prf((uint8_t*) secret, secret_len, (uint8_t*) key_pad_str, key_pad_len, md, &md_len, sha1);
 
-    HMAC(EVP_sha1(),secret, secret_len, (const unsigned char *)key_pad_str, key_pad_len, md, &md_len);
+    //HMAC(EVP_sha1(),secret, secret_len, (const unsigned char *)key_pad_str, key_pad_len, md, &md_len);
     //printf("Key expansion \n");
     //dump_memory(md, md_len);
 
     uint8_t* output = malloc(SHA1_DIGEST_LENGTH);
-    unsigned int out_len = 0;
+    size_t out_len = 0;
     //ora questo deve essere utilizzato pe firmare l'auth payload
-    HMAC(EVP_sha1(), md, md_len, auth_payload, auth_len, output, &out_len);
+
+    //prf(md, md_len, auth_payload, auth_len, output, &out_len, )
+    //HMAC(EVP_sha1(), md, md_len, auth_payload, auth_len, output, &out_len);
+
+    prf(md, md_len, auth_payload, auth_len, output, &out_len, sha1);
     //printf("AUTH PAYLOAD \n");
     //dump_memory(output, out_len);
 
@@ -488,7 +502,9 @@ int main(int argc, char* argv[]){
 
     uint8_t *checksum = malloc(icv_len);
 
-    HMAC(EVP_sha1(), ike_sa.association.sk_ai, SHA1_DIGEST_LENGTH, response, response_len, checksum, &md_len);
+    //HMAC(EVP_sha1(), ike_sa.association.sk_ai, SHA1_DIGEST_LENGTH, response, response_len, checksum, &md_len);
+    
+    prf(ike_sa.association.sk_ai, SHA1_DIGEST_LENGTH, response, response_len, checksum, &md_len, sha1);
     response = realloc(response, response_len+icv_len);
     mempcpy(response + 28 + 4 +iv_len + ciphertext_len, checksum, icv_len);
 

@@ -76,7 +76,7 @@ int initiate_crypto(cipher_suite_t* suite, crypto_context_t* ctx, const cipher_o
 void print_hex(const unsigned char *data, size_t len);
 
 
-int prf(uint8_t** key, size_t key_len, uint8_t** data, size_t data_len, uint8_t** digest, unsigned int* digest_len);
+int prf_old(uint8_t** key, size_t key_len, uint8_t** data, size_t data_len, uint8_t** digest, unsigned int* digest_len);
 
 void prf_plus(crypto_context_t* left, crypto_context_t* right, uint8_t** T_buffer);
 
